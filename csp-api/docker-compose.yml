@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+
+  api:
+    container_name: scp-api
+    build: .
+    image: scp-api
+    ports:
+      - "8080:8080"
+      - "8077:8077"
+    depends_on:
+      - database
+
+  database:
+    container_name: scp-database
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
