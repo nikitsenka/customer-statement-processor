@@ -1,8 +1,24 @@
+import com.github.spotbugs.SpotBugsTask
+
+buildscript {
+	repositories {
+		gradlePluginPortal()
+		mavenCentral()
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
+
+apply from: file('./gradle/commonChecks.gradle')
 
 group = 'com.csp'
 version = '0.0.1-SNAPSHOT'
