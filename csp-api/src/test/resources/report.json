@@ -1,0 +1,20 @@
+{
+  "peportId": 11111,
+  "processTime": null,
+  "records": [
+    {
+      "reference": 1234,
+      "code": 3001
+    },
+    {
+      "reference": 1234,
+      "processTime": null,
+      "code": 3002
+    },
+    {
+      "reference": 1235,
+      "processTime": null,
+      "code": 1000
+    }
+  ]
+}

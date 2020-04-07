@@ -1,7 +1,7 @@
 package com.csp.api.integration;
 
 import com.csp.api.TestUtils;
-import com.csp.api.domain.repository.RecordRepository;
+import com.csp.api.domain.repository.ReportRepository;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -26,13 +26,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CucumberContextLoader {
 
     @Autowired
-    private RecordRepository recordRepository;
+    private ReportRepository recordRepository;
 
     @LocalServerPort
     int port;
     private HttpClient httpClient;
     private String baseUrl;
     private String recordJson;
+    private HttpResponse<String> result;
 
     @Before
     public void setupTestContext() {
@@ -46,32 +47,20 @@ public class CucumberContextLoader {
         recordRepository.deleteAll();
     }
 
-    @Given("^Record doesn't exist$")
-    public void record_doesnt_exist() {
+    @Given("^Service operates successfully$")
+    public void service_operates_successfully() {
 
     }
 
-    @When("^I call scp to process a record$")
+    @When("^Service receives deliveries of customer statement records$")
     public void i_call_csp_service() throws IOException, InterruptedException {
-        post("/api/records", recordJson);
+        result = post("/api/records/process", recordJson);
     }
 
-    @Then("^A new record created")
+    @Then("^A new report created")
     public void a_new_record_created() throws IOException, InterruptedException {
-        HttpResponse<String> response = get("/api/records");
-        assertEquals(200, response.statusCode());
-        assertEquals(recordJson, response.body());
-    }
-
-    private HttpResponse<String> get(String urlPath) throws IOException, InterruptedException {
-        return httpClient
-                .send(HttpRequest.newBuilder()
-                                .header(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                                .uri(URI.create(baseUrl + urlPath))
-                                .GET()
-                                .build(),
-                        HttpResponse.BodyHandlers.ofString()
-                );
+        assertEquals(200, result.statusCode());
+        assertEquals(TestUtils.getJsonFromFile("report.json"), result.body());
     }
 
     private HttpResponse<String> post(String urlPath, String body) throws IOException, InterruptedException {
