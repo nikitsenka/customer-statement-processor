@@ -4,6 +4,7 @@ import com.csp.api.domain.entity.Record;
 import com.csp.api.domain.entity.Report;
 import com.csp.api.service.CspService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Main application controller.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class CspRestController {
@@ -23,20 +25,22 @@ public class CspRestController {
 
     /**
      * Return all reports.
+     *
      * @return
      */
-    @GetMapping("/reports")
-    public List<Report> getAll(){
+    @GetMapping(path = "/reports", produces = {"application/json"})
+    public List<Report> getAll() {
         return service.getAll();
     }
 
     /**
      * Process records.
+     *
      * @param records
      * @return result report
      */
     @PostMapping("/records/process")
-    public Report process(@RequestBody List<Record> records){
+    public Report process(@RequestBody List<Record> records) {
         return service.process(records);
     }
 }

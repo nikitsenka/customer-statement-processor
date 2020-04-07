@@ -1,1 +1,20 @@
-<p>report-list works!</p>
+<mat-toolbar>
+    <span>Customer Statement Processor Reports</span>
+</mat-toolbar>
+
+<mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let report">{{report.id}}  </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="processTime">
+        <mat-header-cell *matHeaderCellDef> processTime </mat-header-cell>
+        <mat-cell *matCellDef="let report">{{report.processTime}}  </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
