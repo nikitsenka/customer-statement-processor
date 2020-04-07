@@ -20,6 +20,7 @@ import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -32,19 +33,16 @@ public class CucumberContextLoader {
     int port;
     private HttpClient httpClient;
     private String baseUrl;
-    private String recordJson;
-    private HttpResponse<String> result;
 
     @Before
     public void setupTestContext() {
         httpClient = HttpClient.newHttpClient();
         baseUrl = "http://localhost:" + port;
-        recordJson = TestUtils.getJsonFromFile("record.json");
     }
 
     @After
     public void cleanUpTestContext() {
-        recordRepository.deleteAll();
+       // recordRepository.deleteAll();
     }
 
     @Given("^Service operates successfully$")
@@ -52,21 +50,41 @@ public class CucumberContextLoader {
 
     }
 
-    @When("^Service receives deliveries of customer statement records$")
-    public void i_call_csp_service() throws IOException, InterruptedException {
-        result = post("/api/records/process", recordJson);
+    @When("^Service receives json of customer statement records$")
+    public void json_of_records() throws IOException, InterruptedException {
+        String recordJson = TestUtils.getJsonFromFile("records.json");
+        HttpResponse<String> result = post("/api/records/process", recordJson, APPLICATION_JSON_VALUE);
+        assertEquals(200, result.statusCode());
+    }
+
+    @When("^Service receives xml of customer statement records$")
+    public void xml_of_records() throws IOException, InterruptedException {
+        String recordsXml = TestUtils.getJsonFromFile("records.xml");
+        HttpResponse<String> result = post("/api/records/process", recordsXml, APPLICATION_XML_VALUE);
+        assertEquals(200, result.statusCode());
     }
 
     @Then("^A new report created")
-    public void a_new_record_created() throws IOException, InterruptedException {
-        assertEquals(200, result.statusCode());
-        assertEquals(TestUtils.getJsonFromFile("report.json"), result.body());
+    public void report_created() throws IOException, InterruptedException {
+        HttpResponse<String> reportsResponse = get("/api/reports");
+        assertEquals(200, reportsResponse.statusCode());
     }
 
-    private HttpResponse<String> post(String urlPath, String body) throws IOException, InterruptedException {
+    private HttpResponse<String> get(String urlPath) throws IOException, InterruptedException {
         return httpClient
                 .send(HttpRequest.newBuilder()
                                 .header(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_VALUE)
+                                .uri(URI.create(baseUrl + urlPath))
+                                .GET()
+                                .build(),
+                        HttpResponse.BodyHandlers.ofString()
+                );
+    }
+
+    private HttpResponse<String> post(String urlPath, String body, String contentType) throws IOException, InterruptedException {
+        return httpClient
+                .send(HttpRequest.newBuilder()
+                                .header(HttpHeaders.CONTENT_TYPE, contentType)
                                 .uri(URI.create(baseUrl + urlPath))
                                 .POST(HttpRequest.BodyPublishers.ofString(body))
                                 .build(),

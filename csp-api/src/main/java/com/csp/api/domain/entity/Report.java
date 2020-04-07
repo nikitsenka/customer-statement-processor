@@ -1,7 +1,6 @@
 package com.csp.api.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,10 +23,9 @@ public class Report {
      * Unique identifier of the Report.
      */
     @Id
-    @JsonIgnore
     @GeneratedValue
-    @Column(name = "uuid")
-    private UUID uuid;
+    @Column(name = "id")
+    private UUID id;
 
     /**
      * UTC Time of processing.
@@ -43,6 +41,12 @@ public class Report {
     private List<Result> results;
 
     /**
+     * Default constructor.
+     */
+    public Report() {
+    }
+
+    /**
      * Constructor.
      * @param results
      */
@@ -51,13 +55,15 @@ public class Report {
         this.results = results;
     }
 
-    public UUID getUuid() {
-        return uuid;
-    }
-
     public List<Result> getResults() {
         return results;
     }
 
+    public UUID getId() {
+        return id;
+    }
 
+    public Instant getProcessTime() {
+        return processTime;
+    }
 }

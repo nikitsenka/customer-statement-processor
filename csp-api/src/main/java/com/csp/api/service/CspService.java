@@ -7,6 +7,7 @@ import com.csp.api.domain.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class CspService {
+
+    private static final int SUCCESS = 1000;
+    private static final int DUPLICATION_ERROR = 3001;
+    private static final int INVALID_END_BALANCE = 3002;
 
     @Autowired
     private ReportRepository repository;
@@ -36,7 +41,16 @@ public class CspService {
      */
     public Report process(List<Record> records) {
         List<Result> results = records.stream()
-                .map(record -> new Result(record.getReference(), 1000))
+                .map(record -> {
+                    int resultCode = SUCCESS;
+                    if (!record.getEndBalance().equals(record.getStartBalance().add(record.getMutation()))) {
+                        resultCode = INVALID_END_BALANCE;
+                    }
+                    if (Collections.frequency(records, record) > 1) {
+                        resultCode = DUPLICATION_ERROR;
+                    }
+                    return new Result(record.getReference(), resultCode);
+                })
                 .collect(Collectors.toList());
         return repository.save(new Report(results));
     }

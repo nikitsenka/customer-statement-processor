@@ -1,20 +1,13 @@
 {
-  "peportId": 11111,
-  "processTime": null,
-  "records": [
-    {
-      "reference": 1234,
-      "code": 3001
-    },
-    {
-      "reference": 1234,
-      "processTime": null,
-      "code": 3002
-    },
-    {
-      "reference": 1235,
-      "processTime": null,
-      "code": 1000
-    }
-  ]
+  "processTime" : "2020-04-07T08:49:21.410Z",
+  "results" : [ {
+    "reference" : 1234,
+    "code" : 3001
+  }, {
+    "reference" : 1234,
+    "code" : 3001
+  }, {
+    "reference" : 1235,
+    "code" : 1000
+  } ]
 }

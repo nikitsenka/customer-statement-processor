@@ -21,8 +21,8 @@ public class Result {
     @Id
     @JsonIgnore
     @GeneratedValue
-    @Column(name = "uuid")
-    private UUID uuid;
+    @Column(name = "id")
+    private UUID id;
 
     /**
      * Transaction reference.
@@ -52,8 +52,8 @@ public class Result {
         this.code = code;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public Long getReference() {

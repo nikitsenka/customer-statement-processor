@@ -1,17 +1,12 @@
 package com.csp.api.domain.entity;
 
 import java.math.BigDecimal;
-import java.util.UUID;
+import java.util.Objects;
 
 /**
  * A record of customer statement.
  */
 public class Record {
-
-    /**
-     * Unique identifier of the record.
-     */
-    private UUID uuid;
 
     /**
      * Transaction reference.
@@ -31,7 +26,7 @@ public class Record {
     /**
      * Either an addition (+) or a deduction (-).
      */
-    private String mutation;
+    private BigDecimal mutation;
 
     /**
      * Free text.
@@ -67,11 +62,11 @@ public class Record {
         this.startBalance = startBalance;
     }
 
-    public String getMutation() {
+    public BigDecimal getMutation() {
         return mutation;
     }
 
-    public void setMutation(String mutation) {
+    public void setMutation(BigDecimal mutation) {
         this.mutation = mutation;
     }
 
@@ -89,5 +84,22 @@ public class Record {
 
     public void setEndBalance(BigDecimal endBalance) {
         this.endBalance = endBalance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Record record = (Record) o;
+        return reference.equals(record.reference);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(reference);
     }
 }
