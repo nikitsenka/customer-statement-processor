@@ -1,0 +1,82 @@
+[
+  {
+    "reference": 132843,
+    "accountNumber": "NL56RABO0149876948",
+    "description": "Flowers for Erik Bakker",
+    "startBalance": 90.68,
+    "mutation": -45.33,
+    "endBalance": 45.35
+  },
+  {
+    "reference": 112806,
+    "accountNumber": "NL32RABO0195610843",
+    "description": "Subscription from Erik de Vries",
+    "startBalance": 80.48,
+    "mutation": "+25.19",
+    "endBalance": 105.67
+  },
+  {
+    "reference": 107934,
+    "accountNumber": "NL56RABO0149876948",
+    "description": "Clothes for Jan Dekker",
+    "startBalance": 68.71,
+    "mutation": -15.75,
+    "endBalance": 52.96
+  },
+  {
+    "reference": 191708,
+    "accountNumber": "NL74ABNA0248990274",
+    "description": "Tickets for Erik de Vries",
+    "startBalance": 102.5,
+    "mutation": -20.49,
+    "endBalance": 82.01
+  },
+  {
+    "reference": 112806,
+    "accountNumber": "NL46ABNA0625805417",
+    "description": "Flowers for Willem Theuﬂ",
+    "startBalance": 14.81,
+    "mutation": -11.99,
+    "endBalance": 2.82
+  },
+  {
+    "reference": 112806,
+    "accountNumber": "NL32RABO0195610843",
+    "description": "Subscription from Peter Theuﬂ",
+    "startBalance": 49.25,
+    "mutation": "+23.07",
+    "endBalance": 72.32
+  },
+  {
+    "reference": 191476,
+    "accountNumber": "NL69ABNA0433647324",
+    "description": "Clothes for Vincent de Vries",
+    "startBalance": 74.23,
+    "mutation": -48.76,
+    "endBalance": 25.47
+  },
+  {
+    "reference": 139812,
+    "accountNumber": "NL56RABO0149876948",
+    "description": "Tickets for Peter King",
+    "startBalance": 73.44,
+    "mutation": -30.11,
+    "endBalance": 43.33
+  },
+  {
+    "reference": 192851,
+    "accountNumber": "NL90ABNA0585647886",
+    "description": "Tickets for Richard de Vries",
+    "startBalance": 10.2,
+    "mutation": -28.74,
+    "endBalance": -18.54
+  },
+  {
+    "reference": 187948,
+    "accountNumber": "NL56RABO0149876948",
+    "description": "Clothes for Rik Theuﬂ",
+    "startBalance": 83.04,
+    "mutation": -2.51,
+    "endBalance": 80.53
+  }
+]

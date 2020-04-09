@@ -1,0 +1,2 @@
+debug: true
+api.base.url: http://localhost:8080/api/
