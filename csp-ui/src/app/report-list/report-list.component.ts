@@ -8,7 +8,7 @@ import {ReportsService} from "../services/reports.service";
   styleUrls: ['./report-list.component.css']
 })
 export class ReportListComponent implements OnInit {
-  displayedColumns = ['id', 'processTime'];
+  displayedColumns = ['id', 'processTime', 'results'];
   dataSource: ReportsDataSource;
 
   constructor(private reportsService: ReportsService) {

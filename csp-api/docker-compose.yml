@@ -8,7 +8,8 @@ services:
     image: scp-api
     ports:
       - "8080:8080"
-      - "8077:8077"
+    environment:
+      POSTGRES_HOST: database
     depends_on:
       - database
 

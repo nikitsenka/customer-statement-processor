@@ -16,7 +16,7 @@ import (
 var processReportsCmd = &cobra.Command{
 	Use:     "process reports",
 	Short:   "Initiate customer statements processing using inputs from file",
-	Example: "./scp-cli process reports --file reports.xml",
+	Example: "./scp-cli process reports --file records.xml",
 	Run:     processReports,
 }
 

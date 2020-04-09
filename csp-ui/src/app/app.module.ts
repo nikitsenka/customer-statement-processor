@@ -10,11 +10,13 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTableModule} from "@angular/material/table";
 import {ReportsService} from "./services/reports.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ReportResultPipePipe} from "./report-list/report-result.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReportListComponent
+    ReportListComponent,
+    ReportResultPipePipe
   ],
   imports: [
     BrowserModule,
