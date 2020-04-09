@@ -10,6 +10,23 @@ Build
 ./gradlew build
 ```
 
+Test coverage report:
+
+```
+./gradlew clean build jacocoTestReport
+```
+
+Simple build command will run next checks:
+1. [Checkstyle](http://checkstyle.sourceforge.net/) 
+2. [Spotbugs](https://spotbugs.github.io/)
+
+Run Integration tests
+
+```
+docker-compose up -d database
+./gradlew integrationTest
+```
+
 Run
  
 ```

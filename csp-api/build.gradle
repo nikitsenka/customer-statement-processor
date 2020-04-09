@@ -42,25 +42,25 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-spring:4.3.0'
     testImplementation 'commons-io:commons-io:2.6'
     testImplementation 'org.apache.commons:commons-text:1.8'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.1'
 }
 
 spotbugs {
     toolVersion = '4.0.1'
 }
 
+//Junit5 tests
 test {
     useJUnitPlatform()
+    exclude '**/integration/**'
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 task integrationTest(type: Test) {
     useJUnit()
-
-    include '**/RunCucumberTest.class'
-
-    dependsOn 'cleanTest'
-
     testLogging {
         events "passed", "skipped", "failed"
-        exceptionFormat = 'FULL'
     }
 }

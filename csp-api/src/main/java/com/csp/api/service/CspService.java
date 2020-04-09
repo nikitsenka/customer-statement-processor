@@ -17,9 +17,20 @@ import java.util.stream.Collectors;
 @Service
 public class CspService {
 
-    private static final int SUCCESS = 1000;
-    private static final int DUPLICATION_ERROR = 3001;
-    private static final int INVALID_END_BALANCE = 3002;
+    /**
+     * Status code for successfully processed record.
+     */
+    public static final int SUCCESS = 1000;
+
+    /**
+     * Error code for duplicated records.
+     */
+    public static final int DUPLICATION_ERROR = 3001;
+
+    /**
+     * Error code for records with invalid balance.
+     */
+    public static final int INVALID_END_BALANCE = 3002;
 
     @Autowired
     private ReportRepository repository;
@@ -43,7 +54,8 @@ public class CspService {
         List<Result> results = records.stream()
                 .map(record -> {
                     int resultCode = SUCCESS;
-                    if (!record.getEndBalance().equals(record.getStartBalance().add(record.getMutation()))) {
+                    if (record.getEndBalance() != null
+                            && !record.getEndBalance().equals(record.getStartBalance().add(record.getMutation()))) {
                         resultCode = INVALID_END_BALANCE;
                     }
                     if (Collections.frequency(records, record) > 1) {

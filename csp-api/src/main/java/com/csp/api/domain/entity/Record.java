@@ -38,6 +38,38 @@ public class Record {
      */
     private BigDecimal endBalance;
 
+    /**
+     * Default constructor.
+     */
+    public Record() {
+    }
+
+    /**
+     * Constructor.
+     * @param reference
+     */
+    public Record(Long reference) {
+        this.reference = reference;
+    }
+
+    /**
+     * All params constructor.
+     * @param reference
+     * @param accountNumber
+     * @param startBalance
+     * @param mutation
+     * @param description
+     * @param endBalance
+     */
+    public Record(Long reference, String accountNumber, String startBalance, String mutation, String description, String endBalance) {
+        this.reference = reference;
+        this.accountNumber = accountNumber;
+        this.startBalance = new BigDecimal(startBalance);
+        this.mutation = new BigDecimal(mutation);
+        this.description = description;
+        this.endBalance = new BigDecimal(endBalance);
+    }
+
     public Long getReference() {
         return reference;
     }
