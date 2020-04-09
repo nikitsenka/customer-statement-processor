@@ -2,11 +2,11 @@
 Validates and reports customer statements
 
 # Components
-**csp-api** Rest API for for data management.
+**csp-api** - rest API for for data management
 
-**csp-cli** Command line client for user inputs.
+**csp-cli** - command line client for user inputs
 
-**csp-ui**  Web UI application for reports visuals.
+**csp-ui** - web UI application for processor report results
 
 ## Demo
 
